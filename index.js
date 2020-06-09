@@ -20,3 +20,4 @@
 //at end of 5 questions- it will say "all done// your final score is _(time left)" Enter initials
 //when submit button is hit for initials- it will show hight scores.
 // underneath are two buttons to go back and clear high scores
+console.log("hello world")
