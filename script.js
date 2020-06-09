@@ -6,7 +6,7 @@
 // time by ten seconds with start quiz button at the bottom
 // start with 75 seconds
 // 01- Commonly Used data types DO NOT Include: 
-//1. strings 2. booleans 3. alerts 4. numbers
+//1. strings 2. booleans 3. alerts** 4. numbers
 // 02-The condition in an if/ else statement is enclosed within ___. 
 //1. quotes 2. curly brackets 3.parenthesis 4. square brackets
 //03- Arrays in JavaScript can be used to store __.
@@ -16,8 +16,9 @@
 //05-A very useful tool used during development and debugging for printing content to the debugger is:
 // 1. JavaScript 2. terminal/ bash 3. for loops 4. console.log
 //after each click- put correct or wrong at the bottom
-//if wrong- subtract 10 seconds from timer/ score
+//if wrong- subtract 15 seconds from timer/ score
 //at end of 5 questions- it will say "all done// your final score is _(time left)" Enter initials
 //when submit button is hit for initials- it will show hight scores.
 // underneath are two buttons to go back and clear high scores
 console.log("hello world")
+
