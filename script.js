@@ -20,21 +20,47 @@
 //at end of 5 questions- it will say "all done// your final score is _(time left)" Enter initials
 //when submit button is hit for initials- it will show hight scores.
 // underneath are two buttons to go back and clear high scores
-console.log("hello world")
+// console.log("hello world")
 
-var secondsLeft= 75
-var timeEl = document.querySelector("#timer")
+// var startTimer = confirm("Would you like to start the timer?");
+var secondsLeft= 75;
+var timeEl = document.querySelector("#timer");
+var startGame = document.querySelector("#startGame");
+var startUpPage = document.querySelector("#startUpPage");
+var firstQuestionPage = document.querySelector("#firstQuestionPage");
+var firstButton = document.querySelector("#firstButton");
+var secondQuestionPage = document.querySelector("#secondQuestionPage");
+var secondButton = document.querySelector("#secondButton");
+var thirdQuestionPage = document.querySelector("#thirdQuestionPage");
+var thirdButton = document.querySelector("#thirdButton");
+var fourthQuestionPage = document.querySelector("#fourthQuestionPage");
+var fourthButton = document.querySelector("#fourthButton");
+var fifthQuestionPage = document.querySelector("#fifthQuestionPage");
+var fifthButton = document.querySelector("#fifthButton");
 
-function setTime() {
-var timerInterval = setInterval(function() {
-    secondsLeft--;
+function setTime () {
+    startGame.addEventListener("click", function setTime() {
+    startUpPage.style.display= "none"
+    firstQuestionPage.style.display = "block"
+    var timerInterval = setInterval(function() {
+    secondsLeft-- ;
     timeEl.textContent = secondsLeft;
 
     if(secondsLeft === 0) {
       clearInterval(timerInterval);
     }
-
   }, 1000);
+});
 }
+
+firstButton.addEventListener("click",function() {
+    firstQuestionPage.style.display = "none";
+    secondQuestionPage.style.display= "block";
+});
+
 setTime();
+
+
+
+
 // playButton.addEventListener("click", countdownTimer);
