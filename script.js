@@ -22,3 +22,19 @@
 // underneath are two buttons to go back and clear high scores
 console.log("hello world")
 
+var secondsLeft= 75
+var timeEl = document.querySelector("#timer")
+
+function setTime() {
+var timerInterval = setInterval(function() {
+    secondsLeft--;
+    timeEl.textContent = secondsLeft;
+
+    if(secondsLeft === 0) {
+      clearInterval(timerInterval);
+    }
+
+  }, 1000);
+}
+setTime();
+// playButton.addEventListener("click", countdownTimer);
