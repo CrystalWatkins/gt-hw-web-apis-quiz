@@ -45,6 +45,8 @@
                     <li class = "selections" id="selectionC"></li>
                     <li class ="selections" id="selectionD"></li>
                 </ul>
+                <p id= response>   
+                </p>
             </div>
         </div>
     </div>
@@ -56,11 +58,12 @@
         <form>
             <div class="form-group"></div>
               <label for="inputInitials">Enter Initials</label>
-              <input type="initials" class="form-control" id="inputInials" aria-describedby="initialsBox">
+              <input type="initials" class="form-control" id="userInitials" aria-describedby="initialsBox">
             <div contenteditable="plaintext-only"></div>
         </input>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary" id=submitButton>Submit</button>
           </form>
+          <p id= highScores> </p>
     </div>
     <!-- <div class = container id= highScoresPage page>
         place where initials go/ are stored

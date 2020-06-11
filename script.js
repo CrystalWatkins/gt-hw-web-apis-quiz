@@ -11,9 +11,12 @@ var selectionC = document.getElementById("selectionC");
 var selectionD = document.getElementById("selectionD");
 var endOfQuizPage = document.querySelector("#endQuizPage");
 var scoreEl = document.getElementById("final-score");
+var responseEl = document.getElementById("response");
+var inputInitials = document.getElementById("inputInitials");
+var highScores = document.getElementById("highScores");
+var userInitials = document.getElementById("userInitials");
 //current question starts at 1 ( technically 0 since array is 0 indexed)
 var currentQuestion = 0;
-var scoreArray = [];
 // start game and set up timer
 startGame.addEventListener("click", function () {
   //hide start page when user clicks start btn
@@ -24,13 +27,12 @@ startGame.addEventListener("click", function () {
   var timerInterval = setInterval(function () {
     secondsLeft--;
     timeEl.textContent = secondsLeft;
-
     if (secondsLeft === 0) {
       //when the time runs out this statement will be executed
       clearInterval(timerInterval);
       hideQuestionPage();
       showEndOfQuizPage(secondsLeft); //seconds left === users score which is 0
-    }
+      }
   }, 1000);
   //call generate question function and pass in the current question index so we know
   //what question to display for the user. When user clicks start this is defaulted to zero
@@ -49,27 +51,33 @@ function showQuestionPage() {
 function hideQuestionPage() {
   questionPages.style.display = "none";
 }
-//what we do when user gets answer wrong
+// what we do when user gets answer wrong
 function wrongAnswer() {
-  var score = parseInt(timeEl.textContent) - 10;
-  if (scoreArray.length === 0) {
-    console.log("wrong answer if score", score);
-    //no scores in the array yet
-    scoreArray.push(score);
-  } else {
-    //scores in the array so subtract 10 from the last score
-    //in the array
-    var lastScore = scoreArray.pop();
-    var newScore = lastScore - 10;
-    scoreArray.push(newScore);
-    console.log("wrong answer else new score", newScore);
-  }
-  //clear the question so we can generate the next one
+  // var score = parseInt(timeEl.secondsLeft) - 10;
+  timeEl.textContent= timeEl.textContent-10;
+  console.log("You got a wrong answer")
+  console.log(parseInt(timeEl.secondsLeft));
+  timeEl.textContent = timeEl.textContent- 10;
+
+        // if (scoreArray.length === 0) {
+        //   console.log("wrong answer if score", score);
+        //   //no scores in the array yet
+        //   scoreArray.push(score);
+        // } else {
+        //   //scores in the array so subtract 10 from the last score
+        //   //in the array
+        //   var lastScore = scoreArray.pop();
+        //   var newScore = lastScore - 10;
+        //   scoreArray.push(newScore);
+        //   console.log("wrong answer else new score", newScore);
+        // }
+        //clear the question so we can generate the next one
   clearQuestion();
   //so we can generate the next question in the array
   currentQuestion += 1;
   //generate next question passing in an incremented index
   generateQuestion(currentQuestion);
+  responseEl.textContent = "wrong"
 }
 //what we do when user gets it right
 function rightAnswer() {
@@ -79,6 +87,7 @@ function rightAnswer() {
   currentQuestion += 1;
   //generate next question passing in an incremented index
   generateQuestion(currentQuestion);
+  responseEl.textContent = "right"
 }
 
 function clearQuestion() {
@@ -88,7 +97,6 @@ function clearQuestion() {
   selectionA.innerHTML = "";
   selectionB.innerHTML = "";
   selectionC.innerHTML = "";
-  selectionD.innerHTML = "";
 }
 //show the finish section pass in the score to display it to user
 function showEndOfQuizPage(score) {
@@ -171,21 +179,32 @@ var generateQuestion = function (currentQuestion) {
     } else if (currentQuestion > 4) {
       //quiz finished
       hideQuestionPage();
-      if (scoreArray.length > 0) {
-        //this means subtracted scores were pushed into the array
-        //in the wrongAnswer() function
-        var score = scoreArray.pop(); //get the last score pushed into the array
-        //and pass it to this function to display it to the user
-        console.log("end of quiz if so subtracted scores score", score);
-        showEndOfQuizPage(score);
-      } else {
-        // no subtracted scores added to the array
-        //this means user got all questions correct and their score would be
-        //the total number of seconds left
-        var perfectScore = timeEl.textContent;
-        console.log("end of quiz else perfect score", perfectScore);
-        showEndOfQuizPage(perfectScore);
-      }
+        console.log("end of quiz else perfect score");
+        showEndOfQuizPage(timeEl.textContent);
     }
   }
 };
+
+renderLastRegistered();
+
+function inputInitials (type, message) {
+  msgDiv.textContent = message;
+  msgDiv.setAttribute("class", type);
+}
+
+function highScores () {
+  var initials = localStorage.getItem("initials");
+  userInitials.textContent = initials;
+}
+ submitButton.addEventListener("click", function(event) {
+   event.preventDefault();
+   var initials = document.querySelector("#initials").value;
+   if (initials === "") {
+     displayMessage("error", "Initials cannot be blank");
+   } else {
+     displayMessage("success", "New highScore");
+
+     localStorage.setItem("initials", initials);
+     renderLastRegistered ();
+   }
+ });
