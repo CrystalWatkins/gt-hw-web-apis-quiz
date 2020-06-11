@@ -4,11 +4,7 @@ var timeEl = document.querySelector("#timer");
 var startGame = document.getElementById("startGame");
 var startUpPage = document.querySelector("#startUpPage");
 var questionPages = document.querySelector("#questionPages");
-var questionHeader = document.querySelector("#questionHeader");
-var selectionA = document.querySelector("#selectionA");
-var selectionB = document.querySelector("#selectionB");
-var selectionC = document.querySelector("#selectionC");
-var selectionD = document.querySelector("#selectionD");
+var selections = document.querySelector(".selections");
 var endOfQuizPage = document.querySelector("#endOfQuizPage")
 
 startGame.addEventListener("click", function () {
@@ -26,16 +22,10 @@ startGame.addEventListener("click", function () {
 
 var wrongAnswer = function() {
   console.log ("wrong answer")
-  .addEventListener("click", function () {
-    currentQuestionIndex++;
-  });
-} 
+  };
 var rightAnswer = function () {
   console.log("right answer")
-  selection.addEventListener("click", function () {
-    currentQuestionIndex++;
-  });
-}
+  };
 
 var arrayOfQuestionPages = [
   {
@@ -66,22 +56,28 @@ var arrayOfQuestionPages = [
 ]
 
 var currentQuestionIndex = 0;
+var question =  arrayOfQuestionPages[0]
 
-function generateQuestion() {
-  if (questionIndex > 4 || timer > 0) {
+function nextQuestionPage() {
+  if (currentQuestionIndex > 4 || timer > 0) {
     endOfQuizPage.style.display = "block";
   }
   else {
-    // for (let i = 0; i < arrayOfQuestionPages.length; i++){
-    //   addEventListener "click"
-    // }
+    for (let i = 0; i < arrayOfQuestionPages.length; i++){
+        selections.addEventListener ("click",  function() {
+        console.log ("selection is clicked ")
+        arrayOfQuestionPages.length ++
+      })
+    };
     console.log('made it to here!')
     var currentQuestion = arrayOfQuestionPages[currentQuestionIndex];
     questionPages.innerHTML = "";
     var question = document.querySelector("questionPages");
     question.textContent = currentQuestion.selections;
   }
-}
+};
+
+nextQuestionPage ();
 
 for(let i = 0; i < arrayOfQuestionPages.length; i++){
   var question = arrayOfQuestionPages[i].question;
