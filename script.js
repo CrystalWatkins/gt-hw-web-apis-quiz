@@ -5,103 +5,187 @@ var startGame = document.getElementById("startGame");
 var startUpPage = document.querySelector("#startUpPage");
 var questionPages = document.querySelector("#questionPages");
 var selections = document.querySelector(".selections");
-var endOfQuizPage = document.querySelector("#endOfQuizPage")
-
+var selectionA = document.getElementById("selectionA");
+var selectionB = document.getElementById("selectionB");
+var selectionC = document.getElementById("selectionC");
+var selectionD = document.getElementById("selectionD");
+var endOfQuizPage = document.querySelector("#endQuizPage");
+var scoreEl = document.getElementById("final-score");
+//current question starts at 1 ( technically 0 since array is 0 indexed)
+var currentQuestion = 0;
+var scoreArray = [];
+// start game and set up timer
 startGame.addEventListener("click", function () {
-  startUpPage.style.display = "none"
-  questionPages.style.display = "block"
+  //hide start page when user clicks start btn
+  hideStartPage();
+  //show the questions page
+  showQuestionPage();
+  //set up the counter
   var timerInterval = setInterval(function () {
     secondsLeft--;
     timeEl.textContent = secondsLeft;
 
     if (secondsLeft === 0) {
+      //when the time runs out this statement will be executed
       clearInterval(timerInterval);
+      hideQuestionPage();
+      showEndOfQuizPage(secondsLeft); //seconds left === users score which is 0
     }
   }, 1000);
+  //call generate question function and pass in the current question index so we know
+  //what question to display for the user. When user clicks start this is defaulted to zero
+  //and will be incremented when user selects answer
+  generateQuestion(currentQuestion);
 });
+//hide the start page
+function hideStartPage() {
+  startUpPage.style.display = "none";
+}
+//display questions page to user
+function showQuestionPage() {
+  questionPages.style.display = "block";
+}
+//hide question page (when user finishes the quiz)
+function hideQuestionPage() {
+  questionPages.style.display = "none";
+}
+//what we do when user gets answer wrong
+function wrongAnswer() {
+  var score = parseInt(timeEl.textContent) - 10;
+  if (scoreArray.length === 0) {
+    console.log("wrong answer if score", score);
+    //no scores in the array yet
+    scoreArray.push(score);
+  } else {
+    //scores in the array so subtract 10 from the last score
+    //in the array
+    var lastScore = scoreArray.pop();
+    var newScore = lastScore - 10;
+    scoreArray.push(newScore);
+    console.log("wrong answer else new score", newScore);
+  }
+  //clear the question so we can generate the next one
+  clearQuestion();
+  //so we can generate the next question in the array
+  currentQuestion += 1;
+  //generate next question passing in an incremented index
+  generateQuestion(currentQuestion);
+}
+//what we do when user gets it right
+function rightAnswer() {
+  //clear the question so we can generate the next one
+  clearQuestion();
+  //so we can generate the next question in the array
+  currentQuestion += 1;
+  //generate next question passing in an incremented index
+  generateQuestion(currentQuestion);
+}
 
-var wrongAnswer = function() {
-  console.log ("wrong answer")
-  };
-var rightAnswer = function () {
-  console.log("right answer")
-  };
+function clearQuestion() {
+  //empty question content
+  questionHeader.textContent = "";
+  //empty selections
+  selectionA.innerHTML = "";
+  selectionB.innerHTML = "";
+  selectionC.innerHTML = "";
+  selectionD.innerHTML = "";
+}
+//show the finish section pass in the score to display it to user
+function showEndOfQuizPage(score) {
+  endOfQuizPage.style.display = "block";
+  scoreEl.textContent = score;
+}
 
 var arrayOfQuestionPages = [
   {
     question: "Commonly Used data types DO NOT Include:",
-    selections: ["<button onclick = 'wrongAnswer()'>strings</button>", "<button onclick = 'wrongAnswer()'>booleans</button>", "<button onclick = 'rightAnswer()'>alerts</button>", "<button onclick = 'wrongAnswer()'>numbers</button>"],
-    answer: "alerts",
+    selections: [
+      "<button class='btn btn-sm btn-primary' onclick ='wrongAnswer()'>strings</button>",
+      "<button class='btn btn-sm btn-primary' onclick ='wrongAnswer()'>booleans</button>",
+      "<button class='btn btn-sm btn-primary' onclick ='rightAnswer()'>alerts</button>",
+      "<button class='btn btn-sm btn-primary' onclick ='wrongAnswer()'>numbers</button>",
+    ],
+    // answer: "alerts",
   },
   {
     question: "The condition in an if/ else statement is enclosed within ___.",
-    selections: ["<button onclick = 'wrongAnswer()'>quotes</button>", "<button onclick = 'wrongAnswer()'>curly brackets</button>", "<button onclick = 'rightAnswer()'>parenthesis</button>", "<button onclick = 'wrongAnswer()'>square brackets</button>"],
-    answer: "parenthesis",
+    selections: [
+      "<button class='btn btn-sm btn-primary' onclick ='wrongAnswer()'>quotes</button>",
+      "<button class='btn btn-sm btn-primary' onclick ='wrongAnswer()'>curly brackets</button>",
+      "<button class='btn btn-sm btn-primary' onclick ='rightAnswer()'>parenthesis</button>",
+      "<button class='btn btn-sm btn-primary' onclick ='wrongAnswer()'>square brackets</button>",
+    ],
+    // answer: "parenthesis",
   },
   {
     question: "Arrays in JavaScript can be used to store __.",
-    selections: ["<button onclick = 'wrongAnswer()'>numbers and strings</button>", "<button onclick = 'wrongAnswer ()'>other arrays</button>", "<button onclick = 'wrongAnswer'>booleans</button>","<button onclick = 'rightAnswer'> all of the above</button>"],
-    answer: "all of the above",
+    selections: [
+      "<button class='btn btn-sm btn-primary' onclick ='wrongAnswer()'>numbers and strings</button>",
+      "<button class='btn btn-sm btn-primary' onclick ='wrongAnswer()'>other arrays</button>",
+      "<button class='btn btn-sm btn-primary' onclick ='wrongAnswer()'>booleans</button>",
+      "<button class='btn btn-sm btn-primary' onclick ='rightAnswer()'> all of the above</button>",
+    ],
+    // answer: "all of the above",
   },
   {
-    question: "Sting values must be enclosed within __ when being assigned to variables.",
-    selections: [ "<button onclick = 'wrongAnswer()'>commas</button>", "<button onclick = 'wrongAnswer()'>curly brackets</button>","<button onclick= 'rightAnswer'>quotes</button>", "<button onclick = 'wrongAnswer'>parenthesis</button>"],
-    answer: "quotes",
+    question:
+      "Sting values must be enclosed within __ when being assigned to variables.",
+    selections: [
+      "<button class='btn btn-sm btn-primary' onclick ='wrongAnswer()'>commas</button>",
+      "<button class='btn btn-sm btn-primary' onclick ='wrongAnswer()'>curly brackets</button>",
+      "<button class='btn btn-sm btn-primary' onclick='rightAnswer()'>quotes</button>",
+      "<button class='btn btn-sm btn-primary' onclick ='wrongAnswer()'>parenthesis</button>",
+    ],
+    // answer: "quotes",
   },
   {
-    question: "A very useful tool used during development and debugging for printing content to the debugger is:",
-    selections: ["<button onclick = 'wrongAnswer()'>Javascript</button>", "<button onclick = 'wrongAnswer()'>terminal bash</button>", "<button onclick = 'wrongAnswer()'>for loops</button>", "<button onclick = 'rightAnswer'()>console.log</button>"],
-    answer: "console.log",
+    question:
+      "A very useful tool used during development and debugging for printing content to the debugger is:",
+    selections: [
+      "<button class='btn btn-sm btn-primary' onclick = 'wrongAnswer()'>Javascript</button>",
+      "<button class='btn btn-sm btn-primary' onclick = 'wrongAnswer()'>terminal bash</button>",
+      "<button class='btn btn-sm btn-primary' onclick = 'wrongAnswer()'>for loops</button>",
+      "<button class='btn btn-sm btn-primary' onclick = 'rightAnswer()'>console.log</button>",
+    ],
+    // answer: "console.log",
   },
-]
+];
 
-var currentQuestionIndex = 0;
-var question =  arrayOfQuestionPages[0]
-
-function nextQuestionPage() {
-  if (currentQuestionIndex > 4 || timer > 0) {
-    endOfQuizPage.style.display = "block";
-  }
-  else {
-    for (let i = 0; i < arrayOfQuestionPages.length; i++){
-        selections.addEventListener ("click",  function() {
-        console.log ("selection is clicked ")
-        arrayOfQuestionPages.length ++
-      })
-    };
-    console.log('made it to here!')
-    var currentQuestion = arrayOfQuestionPages[currentQuestionIndex];
-    questionPages.innerHTML = "";
-    var question = document.querySelector("questionPages");
-    question.textContent = currentQuestion.selections;
-  }
-};
-
-nextQuestionPage ();
-
-for(let i = 0; i < arrayOfQuestionPages.length; i++){
-  var question = arrayOfQuestionPages[i].question;
-  var selections = arrayOfQuestionPages[i].selections;
-  var answer = arrayOfQuestionPages[i].answer;
-  if (i === 0) {
-    console.log(question);
-    console.log(selections);
-    console.log(answer);
-    console.log(questionHeader);
-    questionHeader.textContent = `Question: ${question}`;
-    for (let j = 0; j < selections.length; j++) {
-      if (j === 0) {
-          selectionA.innerHTML = selections[0]
-      }else if (j === 1) {
-          selectionB.innerHTML = selections[1]
-      } else if (j === 2) {
-          selectionC.innerHTML = selections[2]
-      } else if (j === 3) {
-          selectionD.innerHTML = selections[3]
+var generateQuestion = function (currentQuestion) {
+  for (var i = 0; i < arrayOfQuestionPages.length; i++) {
+    var selections = arrayOfQuestionPages[i].selections;
+    if (currentQuestion === i) {
+      //grabs the index in the array that matches current question
+      questionHeader.textContent = 'Question:' + ' ' + arrayOfQuestionPages[i].question;
+      for (var j = 0; j < selections.length; j++) {
+        if (j === 0) {
+          selectionA.innerHTML = selections[0];
+        } else if (j === 1) {
+          selectionB.innerHTML = selections[1];
+        } else if (j === 2) {
+          selectionC.innerHTML = selections[2];
+        } else if (j === 3) {
+          selectionD.innerHTML = selections[3];
+        }
       }
+    } else if (currentQuestion > 4) {
+      //quiz finished
+      hideQuestionPage();
+      if (scoreArray.length > 0) {
+        //this means subtracted scores were pushed into the array
+        //in the wrongAnswer() function
+        var score = scoreArray.pop(); //get the last score pushed into the array
+        //and pass it to this function to display it to the user
+        console.log("end of quiz if so subtracted scores score", score);
+        showEndOfQuizPage(score);
+      } else {
+        // no subtracted scores added to the array
+        //this means user got all questions correct and their score would be
+        //the total number of seconds left
+        var perfectScore = timeEl.textContent;
+        console.log("end of quiz else perfect score", perfectScore);
+        showEndOfQuizPage(perfectScore);
       }
     }
-}
- 
-
-
+  }
+};
