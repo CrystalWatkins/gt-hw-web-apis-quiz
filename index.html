@@ -27,72 +27,31 @@
     <div class="container" id="startUpPage">
             <div class="heading" justify-content-md-center>
                 <h1>Coding Quiz Challenge</h1>
-                <h2>
+                <h3>
                     Try to answer the following code-related questions within the time
                     limit. Keep in mind that incorrect answers will penalize your score/
                     time by ten seconds
-                </h2>
+                </h3>
                 <button type="button" class="btn btn-primary" id="startGame">
                     Start Quiz
                 </button>
                 
             </div>
     </div>
-    <div class = container id="firstQuestionPage">
-            <div>
-            <p> Commonly Used data types DO NOT Include: </p>
+    <div class= "container" id="questionPages">
+        <div class="row">
+            <div class="col-sm 6">
+                <h3 id=questionHeader> </h3>
+                <ul>
+                    <li id="selectionA"></li>
+                    <li id="selectionB"></li>
+                    <li id="selectionC"></li>
+                    <li id="selectionD"></li>
+                </ul>
             </div>
-            <ul>
-            <li><button type="button" class="btn btn-primary" id="firstButton">strings</button></li>
-            <li><button type="button" class="btn btn-primary" id="firstButton">booleans</button></li>
-            <li><button type="button" class="btn btn-primary" id="firstButton">alerts</button></li>
-            <li><button type="button" class="btn btn-primary" id="firstButton">numbers</button></li>
-            </ul>
-    </div>
-    <div class = container id="secondQuestionPage">
-        <div>
-            <p> The condition in an if/ else statement is enclosed within ___. </p>
         </div>
-            <ul>
-            <li><button type="button" class="btn btn-primary" id="secondButton">quotes</button></li>
-            <li><button type="button" class="btn btn-primary" id="secondButton">curly brackets</button></li>
-            <li><button type="button" class="btn btn-primary" id="secondButton">parenthesis</button></li>
-            <li><button type="button" class="btn btn-primary" id="secondButton">square brackets</button></li>
-            </ul>
     </div>
-    <div class = container id="thirdQuestionPage">
-        <div>
-            <p> Arrays in JavaScript can be used to store __. </p>
-        </div>
-            <ul>
-            <li><button type="button" class="btn btn-primary" id="thirdButton">numbers and strings</button></li>
-            <li><button type="button" class="btn btn-primary" id="thirdButton">other arrays</button></li>
-            <li><button type="button" class="btn btn-primary" id="thirdButton">booleans</button></li>
-            <li><button type="button" class="btn btn-primary" id="thirdButton">all of the above</button></li>
-            </ul>
-    </div>
-    <div class = container id="fourthQuestionPage">
-        <div>
-            <p> Sting values must be enclosed within __ when being assigned to variables. </p>
-        </div>
-            <ul>
-            <li><button type="button" class="btn btn-primary" id="fourthButton">commas</button></li>
-            <li><button type="button" class="btn btn-primary" id="fourthButton">curly brackets</button></li>
-            <li><button type="button" class="btn btn-primary" id="fourthButton">quotes</button></li>
-            <li><button type="button" class="btn btn-primary" id="fourthButton">parenthesis</button></li>
-            </ul>
-    </div>
-    <div class = container id="fifthQuestionPage">
-        <div>
-            <p> A very useful tool used during development and debugging for printing content to the debugger is: </p>
-        </div>
-            <ul>
-            <li><button type="button" class="btn btn-primary" id="fifthButton">JavaScript</button></li>
-            <li><button type="button" class="btn btn-primary" id="fifthButton">terminal/ bash</button></li>
-            <li><button type="button" class="btn btn-primary" id="fifthButton">for loops</button></li>
-            <li><button type="button" class="btn btn-primary" id="fifthButton">console.log</button></li>
-            </ul>
-    </div>
+    
     <div class=container id= "endQuizPage">
         All done!
         Your final score is ("")
@@ -105,12 +64,12 @@
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
     </div>
-    <div class = container id= highScoresPage page>
+    <!-- <div class = container id= highScoresPage page>
         place where initials go/ are stored
         go back button /// clear high scores 
         Either clears or re-sets the page! yay!
-    </div>
-        
+    </div> -->
+         
 
     <script src="script.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"

@@ -1,22 +1,6 @@
-#firstQuestionPage {
+#questionPages {
     display: none;
-}
-
-#secondQuestionPage {
-    display: none;
-}
-#thirdQuestionPage {
-    display:none;
-}
-#fourthQuestionPage {
-    display:none;
-}
-#fifthQuestionPage {
-    display:none;
 }
 #endQuizPage {
-    display:none;
-}
-#highScoresPage {
-    display:none;
+    display: none;
 }
