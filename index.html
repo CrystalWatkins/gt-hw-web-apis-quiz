@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,7 +8,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
 </head>
-
 <body>
     <header class="header">
         <div class="container">
@@ -27,90 +25,52 @@
     <div class="container" id="startUpPage">
             <div class="heading" justify-content-md-center>
                 <h1>Coding Quiz Challenge</h1>
-                <h2>
+                <h3>
                     Try to answer the following code-related questions within the time
                     limit. Keep in mind that incorrect answers will penalize your score/
                     time by ten seconds
-                </h2>
+                </h3>
                 <button type="button" class="btn btn-primary" id="startGame">
                     Start Quiz
-                </button>
-                
+                </button>          
             </div>
     </div>
-    <div class = container id="firstQuestionPage">
-            <div>
-            <p> Commonly Used data types DO NOT Include: </p>
+    <div class= "container" id="questionPages">
+        <div class="row">
+            <div class="col-sm 6">
+                <h3 id=questionHeader> </h3>
+                <ul>
+                    <li class= "selections" id="selectionA"></li>
+                    <li class = "selections" id="selectionB"></li>
+                    <li class = "selections" id="selectionC"></li>
+                    <li class ="selections" id="selectionD"></li>
+                </ul>
+                <p id= response>   
+                </p>
             </div>
-            <ul>
-            <li><button type="button" class="btn btn-primary" id="firstButton">strings</button></li>
-            <li><button type="button" class="btn btn-primary" id="firstButton">booleans</button></li>
-            <li><button type="button" class="btn btn-primary" id="firstButton">alerts</button></li>
-            <li><button type="button" class="btn btn-primary" id="firstButton">numbers</button></li>
-            </ul>
-    </div>
-    <div class = container id="secondQuestionPage">
-        <div>
-            <p> The condition in an if/ else statement is enclosed within ___. </p>
         </div>
-            <ul>
-            <li><button type="button" class="btn btn-primary" id="secondButton">quotes</button></li>
-            <li><button type="button" class="btn btn-primary" id="secondButton">curly brackets</button></li>
-            <li><button type="button" class="btn btn-primary" id="secondButton">parenthesis</button></li>
-            <li><button type="button" class="btn btn-primary" id="secondButton">square brackets</button></li>
-            </ul>
     </div>
-    <div class = container id="thirdQuestionPage">
-        <div>
-            <p> Arrays in JavaScript can be used to store __. </p>
-        </div>
-            <ul>
-            <li><button type="button" class="btn btn-primary" id="thirdButton">numbers and strings</button></li>
-            <li><button type="button" class="btn btn-primary" id="thirdButton">other arrays</button></li>
-            <li><button type="button" class="btn btn-primary" id="thirdButton">booleans</button></li>
-            <li><button type="button" class="btn btn-primary" id="thirdButton">all of the above</button></li>
-            </ul>
-    </div>
-    <div class = container id="fourthQuestionPage">
-        <div>
-            <p> Sting values must be enclosed within __ when being assigned to variables. </p>
-        </div>
-            <ul>
-            <li><button type="button" class="btn btn-primary" id="fourthButton">commas</button></li>
-            <li><button type="button" class="btn btn-primary" id="fourthButton">curly brackets</button></li>
-            <li><button type="button" class="btn btn-primary" id="fourthButton">quotes</button></li>
-            <li><button type="button" class="btn btn-primary" id="fourthButton">parenthesis</button></li>
-            </ul>
-    </div>
-    <div class = container id="fifthQuestionPage">
-        <div>
-            <p> A very useful tool used during development and debugging for printing content to the debugger is: </p>
-        </div>
-            <ul>
-            <li><button type="button" class="btn btn-primary" id="fifthButton">JavaScript</button></li>
-            <li><button type="button" class="btn btn-primary" id="fifthButton">terminal/ bash</button></li>
-            <li><button type="button" class="btn btn-primary" id="fifthButton">for loops</button></li>
-            <li><button type="button" class="btn btn-primary" id="fifthButton">console.log</button></li>
-            </ul>
-    </div>
+    
     <div class=container id= "endQuizPage">
-        All done!
-        Your final score is ("")
-        Enter Initials
+        " All done! Your final score is "
+        <span id="final-score"></span>
+        " Enter Initials "
         <form>
-            <div class="form-group">
-              <label for="inputInitials">Enter Initials</label>
-              <input type="initials" class="form-control" id="inputInials" aria-describedby="initialsBox">
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <div class="form-group"></div>
+              <label for="userInitials">Enter Initials</label>
+              <input type="initials" class="form-control" id="userInitials" aria-describedby="initialsBox">
+            <div contenteditable="plaintext-only"></div>
+        </input>
+            <button type="submit" class="btn btn-primary" id=submitButton>Submit</button>
           </form>
+          <p id= highScores> </p>
     </div>
-    <div class = container id= highScoresPage page>
+    <!-- <div class = container id= highScoresPage page>
         place where initials go/ are stored
         go back button /// clear high scores 
         Either clears or re-sets the page! yay!
-    </div>
-        
+    </div> -->
+         
 
     <script src="script.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
