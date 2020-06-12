@@ -12,28 +12,32 @@ var selectionD = document.getElementById("selectionD");
 var endOfQuizPage = document.querySelector("#endQuizPage");
 var scoreEl = document.getElementById("final-score");
 var responseEl = document.getElementById("response");
-var inputInitials = document.getElementById("inputInitials");
 var highScores = document.getElementById("highScores");
 var userInitials = document.getElementById("userInitials");
 //current question starts at 1 ( technically 0 since array is 0 indexed)
 var currentQuestion = 0;
 // start game and set up timer
+function setTimer(wrongAnswer) {
+var timerInterval = setInterval(function () {
+  if (wrongAnswer) clearInterval(timerInterval);
+  secondsLeft--;
+  timeEl.textContent = secondsLeft;
+  if (secondsLeft === 0) {
+    //when the time runs out this statement will be executed
+    clearInterval(timerInterval);
+    hideQuestionPage();
+    showEndOfQuizPage(secondsLeft); //seconds left === users score which is 0
+    }
+}, 1000);
+}
+
 startGame.addEventListener("click", function () {
   //hide start page when user clicks start btn
   hideStartPage();
   //show the questions page
   showQuestionPage();
+  setTimer();
   //set up the counter
-  var timerInterval = setInterval(function () {
-    secondsLeft--;
-    timeEl.textContent = secondsLeft;
-    if (secondsLeft === 0) {
-      //when the time runs out this statement will be executed
-      clearInterval(timerInterval);
-      hideQuestionPage();
-      showEndOfQuizPage(secondsLeft); //seconds left === users score which is 0
-      }
-  }, 1000);
   //call generate question function and pass in the current question index so we know
   //what question to display for the user. When user clicks start this is defaulted to zero
   //and will be incremented when user selects answer
@@ -53,25 +57,10 @@ function hideQuestionPage() {
 }
 // what we do when user gets answer wrong
 function wrongAnswer() {
-  // var score = parseInt(timeEl.secondsLeft) - 10;
-  timeEl.textContent= timeEl.textContent-10;
-  console.log("You got a wrong answer")
-  console.log(parseInt(timeEl.secondsLeft));
-  timeEl.textContent = timeEl.textContent- 10;
-
-        // if (scoreArray.length === 0) {
-        //   console.log("wrong answer if score", score);
-        //   //no scores in the array yet
-        //   scoreArray.push(score);
-        // } else {
-        //   //scores in the array so subtract 10 from the last score
-        //   //in the array
-        //   var lastScore = scoreArray.pop();
-        //   var newScore = lastScore - 10;
-        //   scoreArray.push(newScore);
-        //   console.log("wrong answer else new score", newScore);
-        // }
-        //clear the question so we can generate the next one
+  var deductedScore = parseInt(timeEl.textContent - 10);
+  secondsLeft = deductedScore;
+  //this clears the interval, since it was already cleared above
+  setTimer(true);
   clearQuestion();
   //so we can generate the next question in the array
   currentQuestion += 1;
@@ -181,28 +170,31 @@ var generateQuestion = function (currentQuestion) {
       hideQuestionPage();
         console.log("end of quiz else perfect score");
         showEndOfQuizPage(timeEl.textContent);
+        timeEl.textContent = "";
     }
   }
 };
 
+
 renderLastRegistered();
 
-function inputInitials (type, message) {
+function userInitials (type, message) {
   msgDiv.textContent = message;
   msgDiv.setAttribute("class", type);
 }
 
-function highScores () {
+function renderLastRegistered () {
   var initials = localStorage.getItem("initials");
   userInitials.textContent = initials;
 }
  submitButton.addEventListener("click", function(event) {
    event.preventDefault();
-   var initials = document.querySelector("#initials").value;
+   var initials = document.getElementById("userInitials").value;
+
    if (initials === "") {
-     displayMessage("error", "Initials cannot be blank");
+     alert("error- Initials cannot be blank");
    } else {
-     displayMessage("success", "New highScore");
+     alert("New highScore");
 
      localStorage.setItem("initials", initials);
      renderLastRegistered ();
