@@ -24,6 +24,7 @@ var timer = 75
  //otherwise the countdown will start negative and keep going. This is based on 
  //the speed of the browser
 startGame.addEventListener("click", function () {
+
   interval = setInterval(function(){
     if(timer === 0){
         clearInterval()
@@ -164,32 +165,40 @@ var generateQuestion = function (currentQuestion) {
       hideQuestionPage();
       showEndOfQuizPage(timeEl.textContent);
       timeEl.textContent = "";
-      clearInterval(timeEl);
       scoreEl.innerHTML = "your final score is " + timer + ".";
+      clearInterval(interval);
     }
   }
 };
 
-renderLastRegistered();
+
+
+// renderLastRegistered();
 //creating the dynamic initials
-function renderLastRegistered () {
-  var initials = localStorage.getItem("initials");
-  userInitials.textContent = initials;
-}
+//still working on/ perfecting
+// function renderLastRegistered () {
+//   var initials = localStorage.getItem("initials");
+//   var highScore = localStorage.getItem("scoreEl");
+//   userInitials.textContent = initials;
+// }
 //this is storing the names of the last users
  submitButton.addEventListener("click", function(event) {
    event.preventDefault();
    hideEndOfQuizPage ();
    showHighScoresPage ();
+   //did not get to finalize lines below, was still working on
+  //  var initials = document.querySelector("#userInitials").value;
+  //  var highScore = document.querySelector("#highScore").value;
 
 // this allows them to hit the save button and for their initials to be saved 
 //to local storage
-   if (initials === "") {
-     alert("error- Initials cannot be blank");
-     return;
-   } else {
-    var initials = document.getElementById("userInitials").value;
-   }
+  //  if (initials === "") {
+  //    alert("error- Initials cannot be blank");
+  //    return;
+  //  } else {
+  //   localStorage.setItem("initials", initials);
+  //   localStorage.setItem("highScore", highScore);
+  //  }
  });
  
  function hideEndOfQuizPage() {
