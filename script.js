@@ -172,33 +172,13 @@ var generateQuestion = function (currentQuestion) {
 };
 
 
-
-// renderLastRegistered();
-//creating the dynamic initials
-//still working on/ perfecting
-// function renderLastRegistered () {
-//   var initials = localStorage.getItem("initials");
-//   var highScore = localStorage.getItem("scoreEl");
-//   userInitials.textContent = initials;
-// }
-//this is storing the names of the last users
+//this is where the user puts their initials and goes to the next page where it
+// would go to the next page and restart the quiz!
  submitButton.addEventListener("click", function(event) {
    event.preventDefault();
    hideEndOfQuizPage ();
    showHighScoresPage ();
-   //did not get to finalize lines below, was still working on
-  //  var initials = document.querySelector("#userInitials").value;
-  //  var highScore = document.querySelector("#highScore").value;
 
-// this allows them to hit the save button and for their initials to be saved 
-//to local storage
-  //  if (initials === "") {
-  //    alert("error- Initials cannot be blank");
-  //    return;
-  //  } else {
-  //   localStorage.setItem("initials", initials);
-  //   localStorage.setItem("highScore", highScore);
-  //  }
  });
  
  function hideEndOfQuizPage() {
