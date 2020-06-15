@@ -28,7 +28,7 @@ This is a homework requirement for GT Full Stack Flex Program. This webpage is d
 
 ## Usage 
 
-This simple HTML file uses best practices for accessibility in programming.
+This simple HTML file uses best practices for web apis.
 
 [Link to Code](https://crystalwatkins.github.io/gt-hw-web-apis-quiz/).
  
